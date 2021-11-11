@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ErrorAlert from "./ErrorAlert.jsx";
+import ListItem from "./ListItem.jsx";
 
 //create your first component
 const Home = () => {
@@ -52,13 +53,11 @@ const Home = () => {
 			<ul className="list-group">
 				{todoList.map((task, index) => {
 					return (
-						<li
+						<ListItem
 							key={index}
-							className="list-group-item task"
-							onClick={() => handleDeleteTask(index)}>
-							{task}
-							<i className="fas fa-times close-task"></i>
-						</li>
+							task={task}
+							handleDeleteTask={() => handleDeleteTask(index)}
+						/>
 					);
 				})}
 			</ul>
