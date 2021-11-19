@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 const ListItem = props => {
 	return (
 		<li
-			key={props.key}
+			// key={props.key}
 			className="list-group-item task"
-			onClick={props.handleDeleteTask}>
-			{props.task}
+			onClick={props.deleteTasks}>
+			{props.task.label}
 			<i className="fas fa-times close-task"></i>
 		</li>
 	);
@@ -16,7 +16,7 @@ const ListItem = props => {
 export default ListItem;
 
 ListItem.propTypes = {
-	key: PropTypes.number,
-	task: PropTypes.string,
-	handleDeleteTask: PropTypes.func
+	// key: PropTypes.number,
+	task: PropTypes.object,
+	deleteTasks: PropTypes.func
 };
