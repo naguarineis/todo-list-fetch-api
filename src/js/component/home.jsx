@@ -92,6 +92,19 @@ const Home = () => {
 		}
 	};
 
+	const deleteAllTasks = async e => {
+		try {
+			const response = await fetch(`${sampleURL}/davidch`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			});
+		} catch {
+			console.log("mori");
+		}
+	};
+
 	useEffect(() => {
 		getTasks();
 	}, []);
@@ -134,6 +147,11 @@ const Home = () => {
 					? `${todoList.length} item left`
 					: `${todoList.length} items left`}
 			</div>
+			<br />
+			<button className="btn btn-danger" onClick={deleteAllTasks}>
+				Delete all tasks
+			</button>
+			<br />
 			<br />
 			{error && <ErrorAlert />}
 		</div>
