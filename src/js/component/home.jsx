@@ -62,9 +62,10 @@ const Home = () => {
 					if (response.ok) {
 						getTasks();
 						setInput(initialState);
+						setError(false);
+					} else {
+						setError(true);
 					}
-				} else {
-					setError(true);
 				}
 			}
 		} catch (error) {
@@ -75,7 +76,7 @@ const Home = () => {
 	const deleteTasks = async id => {
 		const newTaskList = todoList.filter((task, index) => index != id);
 		try {
-			const response = fetch(`${sampleURL}/davidch`, {
+			const response = await fetch(`${sampleURL}/davidch`, {
 				method: "PUT",
 				body: JSON.stringify(newTaskList),
 				headers: {
@@ -84,6 +85,7 @@ const Home = () => {
 			});
 			if (response.ok) {
 				await getTasks();
+				setError(false);
 			}
 		} catch (error) {
 			console.log("mori");
