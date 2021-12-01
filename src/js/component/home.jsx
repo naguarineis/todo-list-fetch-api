@@ -41,8 +41,29 @@ const Home = () => {
 	const getTasks = async () => {
 		try {
 			const response = await fetch(`${sampleURL}/davidch`);
-			const result = await response.json();
-			setTodoList(result);
+			if (response.status == 404) {
+				createUser();
+			} else {
+				const result = await response.json();
+				setTodoList(result);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const createUser = async () => {
+		try {
+			const response = await fetch(`${sampleURL}/davidch`, {
+				method: "POST",
+				body: JSON.stringify([...todoList, input]),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			});
+			if (response.ok) {
+				getTasks();
+			}
 		} catch (error) {
 			console.log(error);
 		}
